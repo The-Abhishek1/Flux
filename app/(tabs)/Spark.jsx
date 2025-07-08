@@ -1,12 +1,13 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Launch from '../../components/Screens/Spark/Launch'
 
 const Spark = () => {
   return (
     <SafeAreaView>
-    <View>
-      <Text>Spark</Text>
-    </View>
+      <View>
+        <Launch/>
+      </View>
     </SafeAreaView>
   )
 }

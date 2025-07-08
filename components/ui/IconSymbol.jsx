@@ -19,6 +19,8 @@ const MAPPING = {
   'brain': 'psychology',
   'play.circle': 'play-circle-outline',
   'ellipsis.vertical': 'more-vert',
+  'chevron.left': 'arrow-back',
+  'shield': 'security',
 };
 
 /**
