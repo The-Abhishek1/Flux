@@ -1,12 +1,13 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import VaultHeader from '../../components/Screens/Vault/VaultHeader'
 
 const Vault = () => {
   return (
     <SafeAreaView>
-    <View>
-      <Text>Vault</Text>
-    </View>
+      <View>
+        <VaultHeader/>
+      </View>
     </SafeAreaView>
   )
 }

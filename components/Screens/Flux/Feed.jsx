@@ -131,7 +131,7 @@ const Feed = () => {
 
               <View style={styles.iconTitle}>
                 <Image source={item.img} style={styles.icon}/>
-                <ThemedText type="subtitle" style={styles.title}>{item.title}</ThemedText>
+                <ThemedText type="defaultSemiBold" style={styles.title}>{item.title}</ThemedText>
               </View>
               {/* Three-Dots Menu */}
               <TouchableOpacity

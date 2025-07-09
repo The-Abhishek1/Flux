@@ -4,10 +4,10 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useRouter } from 'expo-router';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import Video from './Video';
+import UploadSection from './UploadSection';
 
 //Main Function
-const Launch = () => {
+const SparkHeader = () => {
 
   const colorScheme = useColorScheme();  
   const router = useRouter()
@@ -23,7 +23,7 @@ const Launch = () => {
         <ThemedText type="title">Spark</ThemedText>
       </View>
       <View>
-        <Video/>
+        <UploadSection/>
       </View>
     </View>
   )
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Launch
+export default SparkHeader

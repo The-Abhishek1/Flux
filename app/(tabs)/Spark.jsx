@@ -1,12 +1,12 @@
 import { View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Launch from '../../components/Screens/Spark/Launch'
+import SparkHeader from '../../components/Screens/Spark/SparkHeader'
 
 const Spark = () => {
   return (
     <SafeAreaView>
       <View>
-        <Launch/>
+        <SparkHeader/>
       </View>
     </SafeAreaView>
   )

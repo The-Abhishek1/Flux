@@ -5,19 +5,19 @@ import { useState } from 'react';
 import { StyleSheet, Switch, TextInput, TouchableOpacity, View } from 'react-native';
 
 //Main Function
-const Video = () => {
+const UploadSection = () => {
   const colorScheme = useColorScheme();
   const [video, setVideo] = useState(false);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [isEncrypted, setIsEncrypted] = useState(true);
   const [uploading, setUploading] = useState(false);
-
+ 
 
   return (
     <View style={styles.container}>
         <View style={styles.video}>
-        {video ? <ThemedText type='subtitle' style={styles.videoTitle}>{video.name}</ThemedText> : <ThemedText  type='subtitle' style={styles.videoTitle}>No Video Selected</ThemedText>}
+        {video ? <ThemedText type='defaultSemiBold' style={styles.videoTitle}>{video.name}</ThemedText> : <ThemedText  type='defaultSemiBold' style={styles.videoTitle}>No Video Selected</ThemedText>}
         </View>
         <View style={styles.detailsWhole}>
             <TouchableOpacity style={styles.choose}>
@@ -25,15 +25,15 @@ const Video = () => {
             </TouchableOpacity>
             <View style={styles.inputContainer}>
                 <TextInput
-                style={styles.input}
+                style={[styles.input,colorScheme === 'dark' ? styles.light : styles.dark]}
                 placeholder="Spark Title"
-                placeholderTextColor="#A1A1D0"
+                placeholderTextColor={colorScheme == 'dark' ? 'white' : 'black'}
                 onChangeText={setTitle}
                 />
                 <TextInput
-                style={[styles.input,styles.description]}
+                style={[styles.input,styles.description,colorScheme === 'dark' ? styles.light : styles.dark]}
                 placeholder="Describe Your Spark"
-                placeholderTextColor="#A1A1D0"
+                placeholderTextColor={colorScheme == 'dark' ? "white" : 'black'}
                 onChangeText={setDescription}
                 multiline
                 />
@@ -100,7 +100,14 @@ const styles = StyleSheet.create({
         borderColor:'grey',
         padding:15,
         fontWeight:'600',
-        fontSize:15
+        fontSize:15,
+        color:'white'
+    },
+    light:{
+        color:'white'
+    },
+    dark:{
+       color:'black' 
     },
     description:{
         minHeight:70
@@ -133,4 +140,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Video
+export default UploadSection
