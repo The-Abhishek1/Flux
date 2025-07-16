@@ -5,7 +5,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { Video } from 'expo-av';
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Share, StyleSheet, TouchableOpacity, View } from 'react-native';
 import luffy from "../../../assets/images/luffy3.jpg";
 import bindu from "../../../assets/videos/bindu.mp4";
 
@@ -18,7 +18,20 @@ const colorScheme = useColorScheme();
 const [like,setLike]  = useState(false)
 const [dislike,setDislike]  = useState(false)
 const [download,setDownload]  = useState(false)
-const [share,setShare]  = useState(false)
+
+// Example remote video URL (replace with your actual remote URL)
+const remoteVideoUrl = 'https://example.com/video.mp4'; // Replace with your remote video URL
+
+ const shareVideo = async () => {
+    try {
+      await Share.share({
+        message: `🎥 Check out this video: ${remoteVideoUrl}`,
+        url: remoteVideoUrl, // remote URL
+      });
+    } catch (error) {
+      console.log('Error sharing video:', error);
+    }
+  };
 
   return (
     <View style={styles.playingContainer}>
@@ -52,8 +65,8 @@ const [share,setShare]  = useState(false)
                         <IconSymbol name="arrow.down.circle" size={20} color={download ? "red" :Colors[colorScheme ?? 'light'].icon} />
                         <ThemedText>Download</ThemedText>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.eachIcon} onPress={() => setShare(!share)}>
-                        <IconSymbol name="square.and.arrow.up.fill" size={20} color={share ? "red" :Colors[colorScheme ?? 'light'].icon} />
+                    <TouchableOpacity style={styles.eachIcon} onPress={shareVideo}>
+                        <IconSymbol name="square.and.arrow.up.fill" size={20} color={Colors[colorScheme ?? 'light'].icon} />
                         <ThemedText>Share</ThemedText>
                     </TouchableOpacity>
                 </View>
