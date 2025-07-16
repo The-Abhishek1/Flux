@@ -1,12 +1,10 @@
-import { Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Input from '../../components/Screens/Seek/Input'
 
 const Seek = () => {
   return (
     <SafeAreaView>
-    <View>
-      <Text>Seek</Text>
-    </View>
+    <Input/>
     </SafeAreaView>
   )
 }

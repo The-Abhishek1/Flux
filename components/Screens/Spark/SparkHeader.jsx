@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   container:{
     padding:10,
     flexDirection:'column',
-    gap:20
+    gap:60
   },
   iconTitle:{
     flexDirection:'row',

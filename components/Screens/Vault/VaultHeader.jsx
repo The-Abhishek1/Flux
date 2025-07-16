@@ -4,6 +4,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useRouter } from 'expo-router';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import History from './History';
 import Profile from './Profile';
 import VideoGrid from './VideoGrid';
 
@@ -23,10 +24,12 @@ const VaultHeader = () => {
         </TouchableOpacity>
         <ThemedText type="title">Vault</ThemedText>
       </View>
-      <View>
-        <Profile/>
-        <VideoGrid/>
-      </View>
+      <Profile/>
+      <ThemedText style={styles.header}>History</ThemedText>
+      <History/>
+      <ThemedText style={styles.header}>Your Videos</ThemedText>
+      <VideoGrid/>
+
     </View>
   )
 }
@@ -35,12 +38,17 @@ const styles = StyleSheet.create({
   container:{
     padding:10,
     flexDirection:'column',
-    gap:20
+    gap:20,
   },
   iconTitle:{
     flexDirection:'row',
     alignItems:'center',
     gap:10
+  },
+  header:{
+    fontSize:22,
+    fontWeight:'bold',
+    marginBottom:-10
   }
 })
 

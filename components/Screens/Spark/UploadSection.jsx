@@ -1,27 +1,63 @@
 import { ThemedText } from '@/components/ThemedText';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Video } from 'expo-av';
+import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
-import { StyleSheet, Switch, TextInput, TouchableOpacity, View } from 'react-native';
+import { Dimensions, StyleSheet, Switch, TextInput, TouchableOpacity, View } from 'react-native';
 
 //Main Function
 const UploadSection = () => {
   const colorScheme = useColorScheme();
-  const [video, setVideo] = useState(false);
+  const [showDefaultImage, setDefaultImage] = useState(false)
+  const [video, setVideo] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [isEncrypted, setIsEncrypted] = useState(true);
   const [uploading, setUploading] = useState(false);
+
+  const pickVideo = async () => {
+    // Ask for permissions
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      alert('Permission to access media library is required!');
+      return;
+    }
+
+    // Launch picker for videos only
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      allowsEditing: false,
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setVideo(result.assets[0].uri);
+      setDefaultImage(true); // Set showDefaultImage to true
+      console.log(video)
+    }
+  };
  
 
   return (
     <View style={styles.container}>
         <View style={styles.video}>
-        {video ? <ThemedText type='defaultSemiBold' style={styles.videoTitle}>{video.name}</ThemedText> : <ThemedText  type='defaultSemiBold' style={styles.videoTitle}>No Video Selected</ThemedText>}
+        {showDefaultImage ?    
+        <Video
+          source={{ uri: video }}
+          rate={1.0}
+          volume={1.0}
+          isMuted={false}
+          resizeMode="contain"
+          shouldPlay
+          useNativeControls
+          style={{ width: Dimensions.get('window').width - 40, height: 300, marginTop: 20 }}
+
+          /> : <ThemedText  type='defaultSemiBold' style={styles.videoTitle}>No Video Selected</ThemedText>}
         </View>
         <View style={styles.detailsWhole}>
-            <TouchableOpacity style={styles.choose}>
-                <ThemedText type='defaultSemiBold'>Choose Video</ThemedText>
+            <TouchableOpacity onPress={pickVideo} style={styles.choose}>
+                <ThemedText type='defaultSemiBold'>{showDefaultImage ? "Clear Video" : "Choose Video"}</ThemedText>
             </TouchableOpacity>
             <View style={styles.inputContainer}>
                 <TextInput
@@ -29,12 +65,14 @@ const UploadSection = () => {
                 placeholder="Spark Title"
                 placeholderTextColor={colorScheme == 'dark' ? 'white' : 'black'}
                 onChangeText={setTitle}
+                value={title}
                 />
                 <TextInput
                 style={[styles.input,styles.description,colorScheme === 'dark' ? styles.light : styles.dark]}
                 placeholder="Describe Your Spark"
                 placeholderTextColor={colorScheme == 'dark' ? "white" : 'black'}
                 onChangeText={setDescription}
+                value={description}
                 multiline
                 />
             </View>
@@ -63,11 +101,10 @@ const UploadSection = () => {
 const styles = StyleSheet.create({
     container:{
         flexDirection:'column',
-        gap:10,
+        gap:100,
         padding:10
     },
     video:{
-        backgroundColor:'#4A4A5A',
         height:169,
         position:'relative',
         flexDirection:'column',
@@ -93,7 +130,7 @@ const styles = StyleSheet.create({
     inputContainer:{
         flexDirection:'column',
         gap:20,
-        marginTop:50
+        marginTop:20
     },
     input:{
         borderWidth:0.2,

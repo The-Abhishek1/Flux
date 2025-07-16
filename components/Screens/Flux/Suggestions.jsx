@@ -28,6 +28,14 @@ const Suggestions = () => {
     id: '5',
     title: 'Science',
   },
+  {
+    id: '6',
+    title: 'Space',
+  },
+  {
+    id: '7',
+    title: 'USA',
+  },
 ];
 
   return (

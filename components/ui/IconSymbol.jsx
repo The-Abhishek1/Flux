@@ -21,7 +21,15 @@ const MAPPING = {
   'ellipsis.vertical': 'more-vert',
   'chevron.left': 'arrow-back',
   'shield': 'security',
+  'square.and.arrow.up.fill': 'share',      // share icon
+  'pencil': 'edit',                         // edit icon
+  'flame.fill': 'trending-up',              // 🔥 trending icon
+  'hand.thumbsup': 'thumb-up',              // like 👍
+  'hand.thumbsdown': 'thumb-down',          // dislike 👎
+  'arrow.down.circle': 'file-download',   // ✅ download ⬇️
+
 };
+
 
 /**
  * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
