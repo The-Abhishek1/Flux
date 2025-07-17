@@ -24,6 +24,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
         <Stack.Screen name='Video' options={{headerShown:false}}/>
+        <Stack.Screen name='SearchVideos' options={{headerShown:false}}/>
       </Stack>
       <StatusBar style='auto' />
     </ThemeProvider>

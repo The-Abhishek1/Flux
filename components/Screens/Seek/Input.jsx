@@ -3,6 +3,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { useNavigation } from 'expo-router';
 import { useState } from 'react';
 import { Dimensions, StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
+import SearchedVideos from '../SearchVideos/SearchedVideos';
 import Suggestion from './Suggestion';
 
 //Main Function
@@ -26,12 +27,15 @@ export default function Input() {
           numberOfLines={1}
           />
           <TouchableOpacity onPress={()=>{
-            router.navigate('Video')
+              showSuggestion(false)
           }}>
             <IconSymbol size={28} name="magnifyingglass" color={'grey'} />
           </TouchableOpacity>
       </View>
-      <Suggestion showSuggestion={search == '' ? true : false}/>
+      {
+        suggestion ? <Suggestion showSuggestion={search == '' ? true : false}/> : <SearchedVideos/>
+
+      }
     </View>
   )
 }
@@ -39,7 +43,6 @@ export default function Input() {
 const styles = StyleSheet.create({
     container:{
         flexDirection:'column',
-        padding:10,
         backgroundColor:'white',
         height:Dimensions.get('window').height
     },

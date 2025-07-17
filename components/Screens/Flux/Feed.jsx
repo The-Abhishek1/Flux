@@ -3,6 +3,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Video } from 'expo-av';
 import { Image } from 'expo-image';
+import { useNavigation } from 'expo-router';
 import { useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import luffy from "../../../assets/images/luffy.jpg";
@@ -97,6 +98,7 @@ const Feed = () => {
 ];
   const [duration, setDuration] = useState(null);
   const [play, setPlay] = useState(false)
+  const router = useNavigation()
 
   const formatDuration = (millis) => {
     if (!millis) return '0:00';
@@ -137,7 +139,7 @@ const Feed = () => {
             </View>
             <View>
             {/* Video */}
-            <TouchableOpacity style={styles.videoContainer} onPress={() => setPlay(true)}>
+            <TouchableOpacity style={styles.videoContainer} onPress={() => router.navigate("Video")}>
               <Video
             source={{ uri: item.thumbnail }}
             style={styles.video}

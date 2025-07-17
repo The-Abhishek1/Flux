@@ -4,6 +4,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Video } from 'expo-av';
 import { Image } from 'expo-image';
+import { useNavigation } from 'expo-router';
 import { useState } from 'react';
 import { Dimensions, FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import luffy from "../../../assets/images/luffy.jpg";
@@ -15,8 +16,8 @@ const { width: SCREEN_WIDTH } = Dimensions.get('screen');
 // ✅ Separate component for each video item (so hooks are valid)
 const VideoCard = ({ item,index }) => {
   const [duration, setDuration] = useState(null);
-  const [play,setPlay] = useState(false)
   const colorScheme = useColorScheme();  
+  const router = useNavigation()
 
   const formatDuration = (millis) => {
     if (!millis) return '0:00';
@@ -38,12 +39,14 @@ const VideoCard = ({ item,index }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.videoContainer}>
-        <TouchableOpacity onPress={() => setPlay(!play)}>
+        <TouchableOpacity onPress={() => {
+          router.navigate("Video")
+          }}>
           <Video
             source={{ uri: item.thumbnail }}
             style={styles.video}
             resizeMode="cover"
-            shouldPlay={play? true :false}
+            shouldPlay={false}
             isMuted
             onLoad={(status) => {
               if (status.durationMillis) setDuration(status.durationMillis);
@@ -61,7 +64,7 @@ const VideoCard = ({ item,index }) => {
   );
 };
 
-export default function MainVideo() {
+export default function SearchedVideos() {
   const DATA = [
     { id: '1', thumbnail: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', title: 'React Native Tutorial for Beginners', creator: 'Tech Guru', views: '1.2M views', year: '2024' },
     { id: '2', thumbnail: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', title: 'Building a YouTube Clone App', creator: 'Code Master', views: '850K views', year: '2023' },
@@ -78,11 +81,12 @@ export default function MainVideo() {
         data={DATA}
         renderItem={({ item,index }) =>(<VideoCard item={item} index={index}/>)}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{paddingBottom:350}}
+        contentContainerStyle={{paddingBottom:100}}
         initialNumToRender={2}        // Render only 2 videos initially
         windowSize={3}               // Keep only few videos in memory
         removeClippedSubviews={true} // Unmount videos out of view
         maxToRenderPerBatch={2} 
+        showsVerticalScrollIndicator={false}
       />
   );
 }
